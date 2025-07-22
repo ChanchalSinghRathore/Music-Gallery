@@ -2,7 +2,8 @@
 import React from "react";
 import { motion } from "motion/react";
 
-// Animation transition config
+
+
 const transition = {
   type: "spring",
   mass: 0.5,
@@ -12,7 +13,6 @@ const transition = {
   restSpeed: 0.001,
 };
 
-// ================= MenuItem ===================
 export const MenuItem = ({
   setActive,
   active,
@@ -25,7 +25,7 @@ export const MenuItem = ({
   children?: React.ReactNode;
 }) => {
   return (
-    <div onMouseEnter={() => setActive(item)} className="relative">
+    <div onMouseEnter={() => setActive(item)} className="relative ">
       <motion.p
         transition={{ duration: 0.3 }}
         className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
@@ -42,10 +42,13 @@ export const MenuItem = ({
             <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
               <motion.div
                 transition={transition}
-                layoutId="active"
+                layoutId="active" // layoutId ensures smooth animation
                 className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
               >
-                <motion.div layout className="w-max h-full p-4">
+                <motion.div
+                  layout // layout ensures smooth animation
+                  className="w-max h-full p-4"
+                >
                   {children}
                 </motion.div>
               </motion.div>
@@ -57,7 +60,6 @@ export const MenuItem = ({
   );
 };
 
-// ================= Menu ===================
 export const Menu = ({
   setActive,
   children,
@@ -67,15 +69,14 @@ export const Menu = ({
 }) => {
   return (
     <nav
-      onMouseLeave={() => setActive(null)}
-      className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6"
+      onMouseLeave={() => setActive(null)} // resets the state
+      className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6 "
     >
       {children}
     </nav>
   );
 };
 
-// ================= ProductItem ===================
 export const ProductItem = ({
   title,
   description,
@@ -108,12 +109,7 @@ export const ProductItem = ({
   );
 };
 
-// ================= HoveredLink (Fixed typing) ===================
-interface HoveredLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  children: React.ReactNode;
-}
-
-export const HoveredLink: React.FC<HoveredLinkProps> = ({ children, ...rest }) => {
+export const HoveredLink = ({ children, ...rest }: any) => {
   return (
     <a
       {...rest}
